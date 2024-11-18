@@ -1,0 +1,64 @@
+{
+  "name": "lit-dragging",
+  "version": "0.1.0",
+  "description": "A dragging library for Lit",
+  "type": "module",
+  "main": "drag-controller.js",
+  "scripts": {
+    "build": "wireit",
+    "start": "wireit",
+    "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lit",
+    "dragging"
+  ],
+  "author": {
+    "name": "Justin Fagnani",
+    "email": "justin@fagnani.com",
+    "url": "http://justinfagnani.com/"
+  },
+  "license": "MIT",
+  "files": [
+    "drag-controller.{js,js.map,d.ts,d.ts.map}"
+  ],
+  "dependencies": {
+    "lit": "^3.2.1"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.4.6",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "wireit": "^0.14.9"
+  },
+  "wireit": {
+    "build": {
+      "command": "tsc",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json"
+      ],
+      "output": [
+        "index.{js,js.map.,d.ts,d.ts.map}",
+        ".tsbuildinfo"
+      ],
+      "clean": "if-file-deleted"
+    },
+    "start": {
+      "command": "wds --open --watch",
+      "service": {
+        "readyWhen": {
+          "lineMatches": "Web Dev Server started..."
+        }
+      },
+      "dependencies": [{
+        "script": "build",
+        "cascade": false
+      }],
+      "files": [
+        "demo/index.html"
+      ]
+    }
+  }
+}
